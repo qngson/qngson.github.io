@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+     
+    <h:head>
+    </h:head>
+ 
+    <h:body>
+        <h:form id="form">
+            <p:messages autoUpdate="true" />
+            <p:panelGrid columns="2">
+                <h:outputText value="Mã tỉnh/thành phố:" />
+                <p:inputText value="#{provinceController.province.code}"/>
+                
+                <h:outputText value="Tên tỉnh/thành phố:" />
+                <p:inputText value="#{provinceController.province.name}"/>
+                
+                <h:outputText value="Quóc gia:" />
+                <p:selectOneMenu id="console" value="#{provinceController.countryCode}">
+                    <f:selectItem itemLabel="Chọn quốc gia" itemValue="" />
+                    <f:selectItems value="#{provinceController.mapCountry.entrySet()}" var="entry" itemLabel="#{entry.value}" itemValue="#{entry.key}" />
+                </p:selectOneMenu>
+
+                <p:commandButton value="Lưu"  process="@form" actionListener="#{provinceController.save}" update=":form">
+                                    </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="tblProvinces" value="#{provinceController.provinces}" var="pro" emptyMessage="Không có dữ liệu" rowIndexVar="index" resizableColumns="false"
+                         rows="10" paginator="true" paginatorPosition="bottom">
+                <p:column headerText="STT" resizable="false"  class="text-center" width="5%">
+                    <h:outputText value="#{index+1}" />
+               </p:column>
+                <p:column headerText="Mã" width="20%">
+                    <h:outputText value="#{pro.code}" />
+               </p:column>
+
+                <p:column headerText="Tên" width="30%">
+                   <h:outputText value="#{pro.name}" />
+               </p:column>
+               <p:column headerText="Quóc gia" width="20%">
+                   <h:outputText value="#{provinceController.fetchCoutry(pro)}" />
+               </p:column>
+                 
+                <p:column headerText="#{language.thao_tac}" class="text-center" exportable="false" width="20%"> 
+                    <p:commandLink value="Xóa"  action="#{provinceController.delete(pro)}" process="@this" title="Xóa" update=":form:tblProvinces">
+                      
+                       <p:confirm header="Xóa dữ liệu"  message="Bạn muốn xóa dữ liệu?"  icon="ui-icon-alert" />
+                   </p:commandLink>
+                   |
+                   <p:commandLink value="Chỉnh sửa" actionListener="#{provinceController.edit(pro)}" process="@this" update=":form" title="Chỉnh sửa">
+                   </p:commandLink>
+               </p:column>
+            </p:dataTable>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Đồng ý" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Hủy" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>
+        
+    </h:body>
+</html>

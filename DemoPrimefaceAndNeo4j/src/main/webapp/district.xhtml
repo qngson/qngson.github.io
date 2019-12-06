@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+    </h:head>
+
+
+    <h:body>
+        <h:form id="form">
+            <p:messages autoUpdate="true" />
+            <p:panelGrid columns="2">
+
+                <h:outputText value="Mã Quận Huyện:" />
+                <p:inputText value="#{districtController.district.code}" required="" />
+
+                <h:outputText value="Tên Quận Huyện:" />
+                <p:inputText value="#{districtController.district.name}"/>
+
+                <h:outputText value="Tỉnh thành" />
+                <p:selectOneMenu id="console" value="#{districtController.provinceId}">
+
+                    <f:selectItem itemLabel="Chọn Tỉnh thành" itemValue="#{null}" />
+                    <f:selectItems value="#{districtController.provinces}" var="pro" itemLabel="#{pro.name}" itemValue="#{pro.id}" />
+                </p:selectOneMenu>
+
+
+
+                <p:commandButton value="Lưu"  process="@form" actionListener="#{districtController.save}" update=":form">
+                </p:commandButton>
+            </p:panelGrid>
+
+            <p:dataTable id="tblDistrict" value="#{districtController.districts}" var="dist" emptyMessage="Không có dữ liệu" rowIndexVar="index" resizableColumns="false"
+                         rows="10" paginator="true" paginatorPosition="bottom">
+                <p:column headerText="STT" resizable="false"  class="text-center" width="5%">
+                    <h:outputText value="#{index+1}" />
+                </p:column>
+                <p:column headerText="Mã" width="20%">
+                    <h:outputText value="#{dist.code}" />
+                </p:column>
+
+                <p:column headerText="Tên" width="30%">
+                    <h:outputText value="#{dist.name}" />
+                </p:column>
+                <ui:param name="moreInfo" value="#{districtController.fetchMoreInfo(dist)}"/>
+                <p:column headerText="Tỉnh Thành" width="20%">
+                    <h:outputText value="#{moreInfo.provinceName}" />
+                </p:column>
+                <p:column headerText="Quoo gia" width="20%">
+                    <h:outputText value="#{moreInfo.countryName}" />
+                </p:column>
+                <p:column headerText="#{language.act}" class="text-center" exportable="false" width="20%"> 
+                    <p:commandLink value="Xóa"  action="#{districtController.delete(dist)}" process="@this" title="Xóa" update=":form:tblDistrict">
+
+                        <p:confirm header="Xóa dữ liệu"  message="Bạn muốn xóa dữ liệu?"  icon="ui-icon-alert" />
+                    </p:commandLink>
+                    |
+                    <p:commandLink value="Chỉnh sửa" actionListener="#{districtController.edit(dist)}" process="@this" update=":form" title="Chỉnh sửa">
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Đồng ý" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Hủy" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+
+
+
+        </h:form>
+
+    </h:body>
+</html>

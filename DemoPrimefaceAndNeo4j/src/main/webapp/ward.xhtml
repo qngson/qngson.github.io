@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+    </h:head>
+
+    <h:body>
+        <h:form id="form">
+            <p:messages autoUpdate="true" />
+            <p:panelGrid columns="2">
+                <h:outputText value="Mã phường/xã:" />
+                <p:inputText value="#{wardController.ward.code}" required=""/>
+
+                <h:outputText value="Tên phường/xã:" />
+                <p:inputText value="#{wardController.ward.name}" required=""/>
+                <h:outputText value="Tỉnh thành:" />
+                <p:selectOneMenu id="console" value="#{wardController.provinceId}">
+                    <p:ajax event="change"  update=":form:district1" listener="#{wardController.changeProvince()}"/>
+                    <f:selectItem itemLabel="Chọn tinh " itemValue="" />
+                    <f:selectItems value="#{wardController.province}" var="pro" itemLabel="#{pro.name}" itemValue="#{pro.id}" />
+                </p:selectOneMenu>
+
+                <h:outputText value="Quận Huyện:" />
+                <p:selectOneMenu id="district1" value="#{wardController.districtId}">
+
+                    <f:selectItem itemLabel="Chọn Quận Huyện" itemValue="" />
+                    <f:selectItems value="#{wardController.district}" var="ward" itemLabel="#{ward.name}" itemValue="#{ward.id}" />
+                </p:selectOneMenu>
+
+
+                <p:commandButton value="Lưu"  process="@form" actionListener="#{wardController.save}" update=":form">
+                </p:commandButton>
+            </p:panelGrid>
+
+            <p:dataTable id="tblWards" value="#{wardController.wards}" var="ward" emptyMessage="Không có dữ liệu" rowIndexVar="index" resizableColumns="false"
+                         rows="10" paginator="true" paginatorPosition="bottom">
+                <p:column headerText="STT" resizable="false"  class="text-center" width="5%">
+                    <h:outputText value="#{index+1}" />
+                </p:column>
+                <p:column headerText="Mã Phường Xã" width="20%">
+                    <h:outputText value="#{ward.code}" />
+                </p:column>
+
+                <p:column headerText="Tên Phường Xã" width="30%">
+                    <h:outputText value="#{ward.name}" />
+                </p:column>
+                <p:column headerText="Tỉnh /Thành Phố" width="20%">
+                    <h:outputText value="#{wardController.fetchProvince(ward)}" />
+                </p:column>
+
+                <p:column headerText="Quận Huyện" width="20%">
+                    <h:outputText value="#{wardController.fetchDistrict(ward)}" />
+                </p:column>
+                
+                <p:column headerText="#{language.hanh_dong}" class="text-center" exportable="false" width="20%"> 
+                    <p:commandLink value="Xóa"  action="#{wardController.delete(ward)}" process="@this" title="Xóa" update=":form:tblWards">
+
+                        <p:confirm header="Xóa dữ liệu"  message="Bạn muốn xóa dữ liệu?"  icon="ui-icon-alert" />
+                    </p:commandLink>
+                    |
+                    <p:commandLink value="Chỉnh sửa" actionListener="#{wardController.edit(ward)}" process="@this" update=":form" title="Chỉnh sửa">
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Đồng ý" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Hủy" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+        </h:form>   
+    </h:body>
+</html>
