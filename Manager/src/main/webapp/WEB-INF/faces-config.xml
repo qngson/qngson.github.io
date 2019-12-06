@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    <application>
+        <el-resolver>
+            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
+        <!--<resource-bundle>
+                <base-name>com.felix.cloudcpm.resources.language</base-name>
+                <var>language</var>
+        </resource-bundle>-->
+    </application>
+    <!--<factory>
+        <exception-handler-factory>
+            com.felix.cloudcpm.web.exception.CustomExceptionHandlerFactory
+        </exception-handler-factory>
+    </factory>-->
+<!--    <factory>
+        <render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory
+        </render-kit-factory>
+    </factory>
+    <lifecycle>
+        <phase-listener>org.omnifaces.eventlistener.ResetInputAjaxActionListener
+        </phase-listener>
+    </lifecycle>-->
+<!--    <converter>
+        <converter-id>entityConverter</converter-id>
+        <converter-class>org.felixvn.system.utilities.EntityConverter</converter-class>
+    </converter>-->
+</faces-config>

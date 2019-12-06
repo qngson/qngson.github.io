@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+     <h:head>
+    </h:head>
+    <h:body>
+        <h2> <div align ="center">Thông Tin Sinh Viên </div> </h2>
+        <div align="center">
+         <h:form id="form" >
+            <p:messages autoUpdate="true" />
+            <p:panelGrid columns="2">
+
+                <h:outputText value="Mã sinh viên:" />
+                <p:inputText value="#{studentController.student.code}" required="" />
+
+                <h:outputText value="Tên sinh viên:" />
+                <p:inputText value="#{studentController.student.name}"/>
+                
+                <h:outputText value="Năm Sinh " />
+                <p:inputText value="#{studentController.student.birth}"/>
+                
+                <h:outputText value="Quê quán" />
+                <p:inputText value="#{studentController.student.province}"/>
+
+                <p:commandButton value="Lưu"  process="@form" actionListener="#{studentController.save}" update=":form">
+                </p:commandButton>
+                <p:commandButton value="Tìm Kiếm"  process="@form" actionListener="a" update=":form">
+                </p:commandButton>
+            </p:panelGrid>
+            <p:dataTable id="tblStudent" value="#{studentController.students}" var="stu" emptyMessage="Không có dữ liệu" rowIndexVar="index" resizableColumns="false"
+                         rows="10" paginator="true" paginatorPosition="bottom">
+                <p:column headerText="STT" resizable="false"  class="text-center" width="5%">
+                    <h:outputText value="#{index+1}" />
+                </p:column>
+                <p:column headerText="Mã" width="20%">
+                    <h:outputText value="#{stu.code}" />
+                </p:column>
+
+                <p:column headerText="Tên Sinh Viên" width="30%">
+                    <h:outputText value="#{stu.name}" />
+                </p:column>
+                
+                <p:column headerText="Năm Sinh" width="20%">
+                    <h:outputText value="#{stu.birth}" />
+                </p:column>
+                
+                 <p:column headerText="Quê Quán" width="20%">
+                    <h:outputText value="#{stu.province}" />
+                </p:column>
+                <p:column headerText="#{language.act}" class="text-center" exportable="false" width="20%"> 
+                    <p:commandLink value="Xóa"  action="#{studentController.delete(stu)}" process="@this" title="Xóa" update=":form:tblStudent">
+
+                        <p:confirm header="Xóa dữ liệu"  message="Bạn muốn xóa dữ liệu?"  icon="ui-icon-alert" />
+                    </p:commandLink>
+                    |
+                    <p:commandLink value="Chỉnh sửa" actionListener="#{studentController.edit(stu)}" process="@this" update=":form" title="Chỉnh sửa">
+                    </p:commandLink>
+                </p:column>
+            </p:dataTable>
+             <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                <p:commandButton value="Đồng ý" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                <p:commandButton value="Hủy" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+            </p:confirmDialog>
+         </h:form>
+        </div>
+    </h:body>
+</html>

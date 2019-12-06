@@ -1,0 +1,10 @@
+com\serviceimpl\StudentServiceImpl.class
+com\service\GenericService.class
+com\entity\ModelObject.class
+com\service\Studentservice.class
+com\entity\Student.class
+com\repository\Studentrepository.class
+com\util\SpringJSFUtil.class
+com\manager\BaseController.class
+com\serviceimpl\GenericServiceImpl.class
+com\manager\StudentController.class
