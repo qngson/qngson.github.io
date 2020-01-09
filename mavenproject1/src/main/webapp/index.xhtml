@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <style type="text/css">
+            .flip-container{
+                perspective: 1000;
+               
+            }
+            .flip-container.hover .flipper{
+                transform: rotateY(180deg);
+                -webkit-transform: rotateY(180deg);
+                -moz-transform: rotateY(180deg);
+                -o-transform: rotateY(180deg);
+                -ms-transform: rotateY(180deg);
+            }
+            .flip-container, .front, .back{
+                width: 320px;
+                height: 480px;
+            }
+            .flipper{
+               
+                transition: 0.6s;
+                -webkit-transition: 0.6s;
+                -ms-transition: 0.6s;
+                -o-transition: 0.6s;
+                transform-style: preserve-3d;
+                position: relative;
+            }
+            .front, .back{
+                backface-visibility: hidden;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+            .front{
+                z-index: 2;
+                transform: rotateY(0deg);
+                -webkit-transform: rotateY(0deg);
+                -moz-transform: rotateY(0deg);
+                -o-transform: rotateY(0deg);
+            }
+            .back{
+                transform: rotateY(180deg);
+                -webkit-transform: rotateY(180deg);
+                -moz-transform: rotateY(180deg);
+                -o-transform: rotateY(180deg);
+            }
+        </style>
+    </h:head>
+    <h:body styleClass="cyan">
+        <div class="container">
+            <div class="flip-container" id="flip">
+                <div class="flipper">
+                    <div class="front card">
+                        <div class="card-content">
+                            <h4 class="grey-text">Register </h4>
+                            <h:form>
+                                <div class="row">
+                                    <div class="col s12 input-field">
+                                        <h:inputText id="name" value="#{flip.name}"/>
+                                        <h:outputLabel for="name" value="Name"/>
+                                    </div>
+                                    <div class="col s12 input-field">
+                                        <h:inputText id="last_name" value="#{flip.lastname}"/>
+                                        <h:outputLabel for="last_name" value="Last Name"/>
+                                    </div>
+                                    <div class="col s12 input-field">
+                                        <h:inputText id="city" value="#{flip.city}"/>
+                                        <h:outputLabel for="city" value="City"/>
+                                    </div>
+                                    <div class="col s12 input-field">
+                                        <p:commandLink value="Continue" actionListener="#{flip.updateData}" styleClass="btn btn-large" onclick="document.querySelector('#flip').classList.toggle('hover');"/>
+                                    </div>
+                                </div>
+
+                            </h:form>
+                            <!--<a href="#" class="btn btn-large" onclick="document.querySelector('#flip').classList.toggle('hover');">Flip!</a>-->
+                        </div>
+                    </div>
+                    <div class="back card">
+                        <div class="card-content">
+                            <p class="grey-text">
+                                data for new customer is
+                            </p>
+                            <h:panelGroup layout="block" id="data">
+                                <p>Name: #{flip.name} </p>
+                                <p>Last Name: #{flip.lastname}</p>
+                                <p>City: #{flip.city} </p>
+                            </h:panelGroup>
+                            <a href="#" class="btn btn-large" onclick="document.querySelector('#flip').classList.toggle('hover');">Back!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h:body >
+</html>
+
