@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title Login</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+
+        <h:outputStylesheet library="css" name="sweetalert.css"/>
+        <h:outputScript library="js" name="sweetalert.min.js"/>
+    </h:head>
+    <h:body styleClass="cyan lighten-5">
+        <div class="valign-wrapper" id="login-page">
+            <div class="container">
+                <div class="center-align">
+                    <div class="row">
+                        <div class="col s6 offset-s3">
+                            <div class="card">
+                                <div class="card-content">
+                                    <img class="responsive-img" style="max-width: 64px" src="https://i.pinimg.com/originals/33/b8/69/33b869f90619e81763dbf1fccc896d8d.jpg"/>
+                                    <div class="left-align">
+                                        <h:form id="login-form">
+                                            <p:growl autoUpdate="true"/>
+                                            <div class="row">
+                                                <div class="col s12 input-field">
+                                                    <h:inputText id="username" value="#{login.username}" required="true" requiredMessage="Username is required!"/>
+                                                    <h:outputLabel for="username" value="Username"/>
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <h:inputSecret id="password" value="#{login.password}" required="true" requiredMessage="Password is required!"/>
+                                                    <h:outputLabel for="password" value="Password"/>
+                                                </div>
+                                                <div class="col s12 input-field">
+                                                    <h:commandLink value="Login" styleClass="btn btn-large" actionListener="#{login.login()}" />
+                                                </div>
+                                            </div>
+                                        </h:form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                $(document).on("ready", function () {
+                    $('#login-page').css({'height': window.innerHeight + 'px'});
+                });
+
+            </script>
+        </div>
+    </h:body>
+</html>
+
