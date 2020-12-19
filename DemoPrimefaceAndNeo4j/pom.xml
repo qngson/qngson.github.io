@@ -103,7 +103,7 @@
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-cypher-dsl</artifactId>
-            <version>${neo4j.cypher.dsl.version}</version>
+            <version>1.7</version>
         </dependency>
         <!-- Lib for online backup Neo4j -->
         <dependency>

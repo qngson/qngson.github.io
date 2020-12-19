@@ -40,8 +40,8 @@
     
     <bean id="graphDbFactory" class="org.neo4j.graphdb.factory.GraphDatabaseFactory"/>
     <bean id="graphDbBuilder" factory-bean="graphDbFactory" factory-method="newEmbeddedDatabaseBuilder">
- 			<constructor-arg value="/opt/db/cpm/test.db"/> 
-			<!--<constructor-arg value="D:\DB\cloudcpm.db"/>-->
+ 			<!-- <constructor-arg value="/opt/db/cpm/test.db"/>  -->
+			<constructor-arg value="C:\DB\cloudcpm.db"/>
     </bean>
     <bean id="graphDbBuilderFinal" factory-bean="graphDbBuilder" factory-method="setConfig">
         <constructor-arg ref="configNeo4j"/>
