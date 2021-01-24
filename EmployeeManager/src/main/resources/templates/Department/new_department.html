@@ -13,7 +13,7 @@
 		<form th:action="@{/saveDepartment}" th:object="${department}" method="post">
 			<div class="form-group" style="margin-left: 15px">
 			Name:<input type="text" th:field="*{name}"
-				placeholder="Department name" />
+				placeholder="Department name" required="required" />
 				</div>
 				<div class="form-group">
 				<button style="margin-left: 15px" class="btn btn-success" type="submit">Save Department</button>
