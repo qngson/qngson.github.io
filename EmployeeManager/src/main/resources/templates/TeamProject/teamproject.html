@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+
+<title>Employee Management System</title>
+</head>
+<body>
+
+<div align="center">
+<a th:href="@{/showNewTeamProjectForm}">Add New Project</a>
+<br>
+<br>
+<a th:href="@{/index}">Back to index</a>
+<h1>Project List</h1>
+<table border="1">
+	<thead>
+		<tr>
+			<th>Project Name</th>
+			<th>Employee</th>
+			<th>Department</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr th:each="teamproject : ${listPro}">
+				<td th:text="${teamproject.name}"></td>	
+				<td th:text="${teamproject.employee.name}"></td>	
+				<td th:text="${teamproject.department.name}"></td>		
+				 <td><a th:href="@{/showTeamProjectUpdate/{id}(id=${teamproject.id})}">Update</a>
+					<a th:href="@{/deleteTeamProject/{id}(id=${teamproject.id})}">Delete</a>
+				 </td> 
+			</tr>
+	</tbody>
+</table> 
+
+</div>
+</body>
+</html>

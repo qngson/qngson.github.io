@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/bootstrap3.4.1/css/bootstrap.min.css}" rel="stylesheet" />
+<title>Employee Management System</title>
+</head>
+<body>
+	<div>
+		<h1>Employee Management System</h1>
+		<hr>
+		<h3 style="margin-left: 20px">
+			Save Employee
+			</h3>
+			<form th:action="@{/saveEmployee}" th:object="${employee}"
+				method="post" style="margin-left: 20px">
+				
+				<div class="form-group">
+					<label>Name:</label> 
+					
+					<input style="margin-left: 15px" type="text" th:field="*{name}"
+						placeholder="Employee name" />
+						<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+						
+				</div>
+			
+				
+			
+				<div class="form-group">
+					<label>Position:</label> 
+					
+					<input  type="text" th:field="*{position}"
+						placeholder="Position"  />
+						<p th:if="${#fields.hasErrors('position')}" th:errors="*{position}"></p>
+				</div>
+			
+				<div class="form-group">
+					<label>Salary:</label><input style="margin-left: 15px" type="text" th:field="*{salary}"
+						placeholder="Salary" />
+						<p th:if="${#fields.hasErrors('salary')}" th:errors="*{salary}" ></p>
+				</div>
+				<div class="form-group">
+					<button class="btn btn-success" type="submit">Save Employee</button>
+				</div>
+
+
+
+
+
+
+			</form>
+			<hr>
+
+			<a style="margin-left: 15px" class="btn btn-primary" th:href="@{/employee}">Back to
+				Employee List</a>
+	</div>
+</body>
+</html>

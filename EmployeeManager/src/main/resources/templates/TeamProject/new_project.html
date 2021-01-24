@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link th:href="@{/bootstrap3.4.1/css/bootstrap.min.css}" rel="stylesheet" />
+<title>Employee Management System</title>
+</head>
+<body>
+	<div>
+		<h1>Employee Management System</h1>
+		<hr>
+		<h3>Save Project</h3>
+		<form th:action="@{/saveTeamProject}" th:object="${teamProject}" method="post" style="margin-left: 15px;">
+		<div class="form-group">
+		<label>Project	Name:</label>
+		<input type="text" th:field="*{name}"
+				placeholder="Project name" />
+			
+		</div>	
+		<div class="form-group" >	
+				<label>Employee:</label>				
+				<select  th:field="*{employee}" id="employee" >
+				<option th:each="e : ${listEmp}" th:value="${e.id}" th:text="${e.name}"/>
+			</select>
+				</div>
+				<div class="form-group">
+				<label>Department:</label>
+				<select  th:field="*{department}" id="department" >
+				<option th:each="d : ${listDepart}" th:value="${d.id}" th:text="${d.name}"/>
+				</select>
+				</div>
+				<div class="form-group">
+				<button class="btn btn-success" style="margin-left: 15px;" type="submit">Save Project</button>
+				</div>
+	
+		</form> 
+		<hr>
+		
+		<a class="btn btn-primary" style="margin-left: 15px;" th:href="@{/teamproject}">Back to Project List</a>
+	</div>
+</body>
+</html>

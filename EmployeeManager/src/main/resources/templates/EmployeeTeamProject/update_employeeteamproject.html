@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<h1>Employee Management System</h1>
+		<hr>
+		<h2>Update EmployeeTeamProject</h2>
+		<form th:action="@{/saveEmployeeTeamProject}" th:object="${employeeTeamProject}" method="post">
+			<input type="hidden" th:field="*{id}"/>
+				Employee:<select  th:field="*{employee}" id="employee" >
+				<option th:each="d : ${listEmp}" th:value="${d.id}" th:text="${d.name}"/>
+			</select>
+				<br />
+				Project:<select  th:field="*{teamProject}" id="teamProject" >
+				<option th:each="p : ${listProject}" th:value="${p.id}" th:text="${p.name}"/>
+			</select>
+				<br />
+				<button type="submit">Update EmployeeTeamProject</button>
+	
+		</form>
+		<hr>
+		<a th:href="@{/teamproject}">Back to EmployeeTeamProject List</a>
+	</div>
+</body>
+</html>

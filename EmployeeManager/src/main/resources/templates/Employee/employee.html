@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+</head>
+<body>
+
+<div align="center">
+<a th:href="@{/showNewEmployeeForm}">Add New Employee</a>
+<br>
+<br>
+<a th:href="@{/index}">Back to index</a>
+<h1>Employee List</h1>
+<table border="1">
+	<thead>
+		<tr>
+			<th>Employee Name</th>
+			<th>Employee Regency</th>
+			<th>Employee Salary</th>
+			<th>Department</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+			<tr th:each="employee : ${listEmp}">
+				<td th:text="${employee.name}"></td>
+				<td th:text="${employee.position}"></td>
+				<td th:text="${employee.salary}"></td>
+				 <td th:text="${employee.department.name}"></td> 
+				 <td><a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}">Update</a>
+					<a th:href="@{/deleteEmployee/{id}(id=${employee.id})}">Delete</a>
+				 </td> 
+			</tr>
+	</tbody>
+</table> 
+
+</div>
+</body>
+</html>

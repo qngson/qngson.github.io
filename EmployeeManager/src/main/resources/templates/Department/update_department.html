@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<h1>Employee Management System</h1>
+		<hr>
+		<h2>Update Employee</h2>
+		<form th:action="@{/saveDepartment}" th:object="${department}" method="post">
+			<input type="hidden" th:field="*{id}"/>
+			<input type="text" th:field="*{name}"
+				placeholder="Department Name" />
+				<br />
+				<!-- <input type="text" th:field="*{lastName}"
+				placeholder="Employee Last Name" />
+				<br />
+				<input type="text" th:field="*{email}"
+				placeholder="Employee Email" />
+				<br /> -->
+				<button type="submit">Update Department</button>
+	
+		</form>
+		<hr>
+		<a th:href="@{/department}">Back to Department List</a>
+	</div>
+</body>
+</html>
