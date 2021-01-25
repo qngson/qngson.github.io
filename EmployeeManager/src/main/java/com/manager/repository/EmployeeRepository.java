@@ -15,7 +15,8 @@ import com.manager.entity.Employee;
 @EnableJpaRepositories
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
-	@Query(value="SELECT * FROM employees u ORDER BY u.id ASC LIMIT 1500",nativeQuery = true)
-	   public List<Employee> getEmp();
+	@Query(value="SELECT * FROM employees e ORDER BY e.id ASC LIMIT 1500",nativeQuery = true)
+	//@Query(value="SELECT e.*, d.* FROM employees e INNER JOIN departments d ON e.id =d.manager_id ORDER BY e.name ASC LIMIT 1500",nativeQuery = true)
+	  public List<Employee> getEmp();
 
 }
